@@ -51,7 +51,7 @@ import (
 
 // TODO(tamird): why does rocksdb not link jemalloc,snappy statically?
 
-// #cgo CPPFLAGS: -I../../../c-deps/libroach/include
+// #cgo CPPFLAGS: -I/opt/cockroach_build/src/github.com/cockroachdb/cockroach/c-deps/libroach/include
 // #cgo LDFLAGS: -lroach
 // #cgo LDFLAGS: -lprotobuf
 // #cgo LDFLAGS: -lrocksdb

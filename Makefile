@@ -788,6 +788,10 @@ $(COCKROACHSHORT): BUILDTARGET = ./pkg/cmd/cockroach-short
 
 $(go-targets-ccl): $(C_LIBS_CCL)
 
+GOFUZZBUILD = /opt/cockroach_build/go-fuzz-build
+export MAKEDIR = /opt/cockroach_build/
+export LIBDIR = $(MAKEDIR)output/lib/
+
 BUILDINFO = .buildinfo/tag .buildinfo/rev
 BUILD_TAGGED_RELEASE =
 
@@ -817,7 +821,7 @@ SETTINGS_DOC_PAGE := docs/generated/settings/settings.html
 # normal and race test builds.
 .PHONY: go-install
 $(COCKROACH) $(COCKROACHOSS) $(COCKROACHSHORT) go-install:
-	 $(xgo) $(build-mode) -v $(GOFLAGS) -tags '$(TAGS)' -ldflags '$(LINKFLAGS)' $(BUILDTARGET)
+	 $(GOFUZZBUILD) -buildtype $(build-mode) -v $(GOFLAGS) -tags '$(TAGS)' -ldflags '$(LINKFLAGS)' $(BUILDTARGET)
 
 # The build targets, in addition to producing a Cockroach binary, silently
 # regenerate SQL diagram BNFs and some other doc pages. Generating these docs
